@@ -3,7 +3,7 @@ class ApplicationController < ActionController::API
 
   private
   def show_error(resource, status)
-    render json: resource, status: status, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerialize
+    render json: resource, status: status, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
   end
 
   def check_login

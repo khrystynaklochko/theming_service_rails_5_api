@@ -1,18 +1,21 @@
 class ThemesController < ApplicationController
   before_action :set_theme, only: [:show, :edit, :update, :destroy]
   before_action :check_loged_in_user, only: [:create, :update, :destroy]
+  
 
+  include LessHelper
   # GET /themes/1
   def show
-    render json: @theme, serializer: ActiveModel::Serializer::themeSerializer and return
+    render json: @theme, serializer: ActiveModel::Serializer::ThemeSerializer
   end
 
   # POST /themes
   def create
-    theme = theme.new(theme_params)
-    if theme.save
-      
-      render json: theme, status: :created
+    theme = Theme.new(theme_params)
+    if theme.save && to_less_file(theme)
+      theme.url = to_less_file(theme)
+      theme.save
+      render json: theme, serializer: ActiveModel::Serializer::ThemeSerializer, status: :created
     else
       show_error(theme, :unprocessable_entity)
     end
@@ -20,8 +23,8 @@ class ThemesController < ApplicationController
 
   # PATCH/PUT /themes/1
   def update
-    if @theme.update_attributes(theme_params)
-      render json: @theme, status: :ok
+    if @theme.update_attributes(theme_params)&& !to_less_file(theme).nil?
+      render json: theme, serializer: ActiveModel::Serializer::ThemeSerializer, status: :ok
     else
       show_error(@theme, :unprocessable_entity)
     end
@@ -29,7 +32,8 @@ class ThemesController < ApplicationController
 
   # DELETE /themes/1
   def destroy
-    @theme.destroy
+    destroyed = destroy_files(@theme)
+    @theme.destroy if destroyed
     head 204
   end
 
@@ -37,9 +41,9 @@ class ThemesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_theme
       begin
-        @theme = theme.find params[:id]
+        @theme = Theme.find params[:id]
       rescue ActiveRecord::RecordNotFound
-        theme = theme.new
+        theme = Theme.new
         theme.errors.add(:id, "Undifined id")
         show_error(theme, 404) and return
       end
