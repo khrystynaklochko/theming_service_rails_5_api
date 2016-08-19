@@ -1,21 +1,23 @@
 # README
+Simple style server sheet Rails 5 API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+For Twitter Bootstrap Less files
+
+Run gulp watch before rails s !
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version 2.4
 
-* System dependencies
+* System dependencies npm, gulp latest
 
-* Configuration
+* Configuration gulp latest
 
-* Database creation
+* Database creation rails db:create
 
-* Database initialization
+* Database initialization rails db:migrate
 
-* How to run the test suite
+* How to run the test suite rspec
 
 * Services (job queues, cache servers, search engines, etc.)
 
