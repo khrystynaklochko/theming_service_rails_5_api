@@ -3,7 +3,7 @@ Simple style server sheet Rails 5 API
 
 For Twitter Bootstrap Less files
 
-Run gulp watch before rails s !
+Run rails s before  gulp watch!
 
 Things you may want to cover:
 

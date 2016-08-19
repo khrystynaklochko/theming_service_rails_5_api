@@ -44,13 +44,13 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
   
-  # Add jobs folder
+  # Add jobs folder into app
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "theming_service_rails_5_api_#{Rails.env}"
   #config.action_mailer.perform_caching = false
   
-  # Add mailer folders first inot app
+  # Add mailer folders first into app
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
