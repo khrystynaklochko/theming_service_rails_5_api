@@ -9,7 +9,7 @@ class ThemesController < ApplicationController
 
   # POST /themes
   def create
-    theme = theme.new(decoded_params)
+    theme = theme.new(theme_params)
     if theme.save
       
       render json: theme, status: :created
